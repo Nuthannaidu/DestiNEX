@@ -1,0 +1,185 @@
+/* Make the layout fill the viewport */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+/* Ensure the main content grows to push the footer down */
+main {
+    flex-grow: 1;
+}
+.head-color{
+    background-color: #1d819b;
+}
+.navbar {
+    height: 5rem;
+    background-color: rgb(255, 255, 255);
+    color: white;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1050; 
+}
+.navbar-collapse.show {
+    background-color: #f8f9fa; /* Light background to match navbar */
+    padding: 1rem; 
+  }
+.nav-link {
+    color: #222222;
+}
+.newlisting:hover{
+    color: #ddd;
+}
+.f-info-links a{
+   text-decoration: none;
+   color: #222222;
+}
+
+.f-info-links a:hover{
+    text-decoration:underline
+}
+.f-info-links,.f-info-socials,.f-info-brand{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.f-info-socials i{
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    cursor: pointer; /* Indicate clickable icons */
+    transition: color 0.3s ease;
+}
+.f-info-socials i:hover {
+    color: #007bff; /* Add hover color effect */
+}
+.link-custom {
+    color: #6c757d; /* Neutral secondary color */
+    background-color: transparent; /* Ensure no default background */
+    padding: 0.2rem 0.4rem; /* Add some padding for a clickable area */
+    border-radius: 0.25rem; /* Rounded corners for hover effect */
+    transition: all 0.3s ease; /* Smooth transition */
+}
+
+.link-custom:hover, 
+.link-custom:focus {
+    color: #fff; /* White text on hover */
+    background-color: #007bff; /* Primary blue background */
+    text-decoration: none; /* Remove underline on hover */
+}
+.f-info{
+    text-align: center;
+    height: 8rem;
+    display: flex;
+    background-color: #ebebeb;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items:space-evenly;
+}
+/* Footer styling */
+.footer{
+            background-color: #f8f9fa; /* Light background color for the entire footer */
+        padding: 1rem 0; /* Uniform padding */
+    
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+    height:auto;
+    display: flex;
+    font-size: 0.9rem; 
+}
+.card{
+   border: none !important;
+   margin-bottom: 2rem;
+   text-decoration: none;
+}
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+  object-fit: cover !important;
+}
+.card-body{
+    padding: 0 !important;
+    text-decoration: none;
+}
+.card-text p{
+    font-weight: 400;
+}
+
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: white;
+}
+.anchor{
+    text-decoration: none;
+    color: black;
+}
+.show-img{
+    height: 30vh;
+}
+.btns{
+    display: flex;
+    height: 38px;
+    margin-bottom: 2rem;
+}
+.review-card {
+    border: 1px solid #ddd !important;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+.review-card .card-body {
+    padding: 20px;
+  }
+.search-card{
+    display: flex; 
+    flex-wrap: wrap;
+     gap: 20px;
+      justify-content: center;
+}
+.search-card:hover{
+    cursor: pointer;
+}
+
+
+
+
+  
+/* for Wanderlust */
+.navbar-brand .brand-name {
+    background: linear-gradient(45deg, #4facfe, #00f2fe); /* Blue gradient for brand name */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-family: 'Pacifico', cursive; /* Travel-inspired font */
+    font-size: 1.75em;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15); /* Subtle shadow */
+}
+
+/* Styling for the Plane Icon */
+.plane-icon {
+    color: #00f2fe; /* Matches gradient theme */
+    transform: rotate(-15deg); /* Slight tilt for dynamic look */
+    transition: transform 0.4s ease, color 0.3s ease;
+}
+
+.navbar-brand:hover .plane-icon {
+    color: #4facfe; /* Darker blue for hover */
+    transform: translateY(-5px) rotate(0deg); /* Lift plane up slightly */
+}
+
+.navbar-brand .brand-name:hover {
+    color: #4facfe !important; /* Darker blue for hover */
+    text-shadow: 2px 2px 8px rgba(79, 172, 254, 0.3); /* Glow effect */
+}
+
+  

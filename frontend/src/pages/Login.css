@@ -1,0 +1,272 @@
+/* Login.css - Clean Professional Design */
+
+.login-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.login-card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  background: white;
+  transition: transform 0.2s ease;
+}
+
+.login-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Header Section */
+.logo-container {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.logo-icon {
+  font-size: 32px;
+  color: white;
+}
+
+.app-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 8px;
+}
+
+.app-subtitle {
+  color: #718096;
+  font-size: 16px;
+  margin-bottom: 0;
+}
+
+/* Form Elements */
+.form-label {
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.form-input {
+  height: 48px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  background-color: #fafafa;
+}
+
+.form-input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  background-color: white;
+}
+
+.form-input::placeholder {
+  color: #a0aec0;
+}
+
+.password-btn {
+  border: 2px solid #e2e8f0;
+  border-left: none;
+  background-color: #fafafa;
+  color: #718096;
+  transition: all 0.2s ease;
+}
+
+.password-btn:hover {
+  background-color: #f1f5f9;
+  color: #667eea;
+}
+
+.password-btn:focus {
+  box-shadow: none;
+  border-color: #667eea;
+}
+
+/* Checkbox and Links */
+.remember-check .form-check-input {
+  border-radius: 4px;
+  border: 2px solid #e2e8f0;
+}
+
+.remember-check .form-check-input:checked {
+  background-color: #667eea;
+  border-color: #667eea;
+}
+
+.remember-check .form-check-label {
+  color: #4a5568;
+  font-size: 14px;
+}
+
+.forgot-link {
+  color: #667eea;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.forgot-link:hover {
+  color: #553c9a;
+  text-decoration: underline;
+}
+
+/* Buttons */
+.signin-btn {
+  height: 48px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.2s ease;
+}
+
+.signin-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.signin-btn:active {
+  transform: translateY(0);
+}
+
+.signin-btn:disabled {
+  opacity: 0.7;
+  transform: none;
+}
+
+/* Divider */
+.divider {
+  text-align: center;
+  position: relative;
+  margin: 24px 0;
+}
+
+.divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #e2e8f0;
+}
+
+.divider span {
+  background: white;
+  color: #718096;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Google Button Override */
+.google-signin-btn {
+  border-radius: 8px !important;
+  height: 48px !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+}
+
+.google-signin-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Error Alert */
+.error-alert {
+  background-color: #fed7d7;
+  border: 1px solid #fc8181;
+  color: #c53030;
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 12px 16px;
+}
+
+/* Footer */
+.signup-link {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.signup-link:hover {
+  color: #553c9a;
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-page {
+    padding: 10px 0;
+  }
+  
+  .login-card {
+    margin: 0 16px;
+  }
+  
+  .app-title {
+    font-size: 28px;
+  }
+  
+  .logo-container {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .logo-icon {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 576px) {
+  .login-card .card-body {
+    padding: 32px 24px !important;
+  }
+  
+  .app-title {
+    font-size: 24px;
+  }
+  
+  .app-subtitle {
+    font-size: 14px;
+  }
+  
+  .form-input {
+    height: 44px;
+    font-size: 14px;
+  }
+  
+  .signin-btn {
+    height: 44px;
+    font-size: 14px;
+  }
+}
+
+/* Focus States for Accessibility */
+.form-input:focus,
+.signin-btn:focus,
+.password-btn:focus {
+  outline: none;
+}
+
+/* Loading State */
+.spinner-border-sm {
+  width: 18px;
+  height: 18px;
+}
