@@ -10,6 +10,9 @@ const wrapAsync = require("../utils/wrap");
 
 // All listings
 router.get("/", wrapAsync(listingController.index));
+router.get("/", async (req, res) => {
+  res.json({ message: "✅ Listings route is working" });
+});
 
 // Search by category
 router.get("/search", wrapAsync(listingController.searchListings));

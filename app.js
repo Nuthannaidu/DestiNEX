@@ -181,3 +181,6 @@ app.get('/api/currentUser', (req, res) => {
     res.status(401).json({ user: null });
   }
 });
+app.get("/test", (req, res) => {
+  res.send("✅ Backend is working!");
+});
