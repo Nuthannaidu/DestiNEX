@@ -9,7 +9,7 @@ const upload = multer({ storage });
 const wrapAsync = require("../utils/wrap");
 
 // All listings
-router.get("/", wrapAsync(listingController.index));
+// router.get("/", wrapAsync(listingController.index));
 router.get("/", async (req, res) => {
   res.json({ message: "✅ Listings route is working" });
 });
