@@ -143,6 +143,7 @@ app.get('/logout', (req, res) => {
 });
 
 // ✅ Routes
+console.log("✅ Mounting listings routes");
 const listingsRoutes = require("./routes/listing.js");
 const reviewRoutes = require("./routes/review.js");
 const userRoutes = require("./routes/user.js");
@@ -183,4 +184,7 @@ app.get('/api/currentUser', (req, res) => {
 });
 app.get("/test", (req, res) => {
   res.send("✅ Backend is working!");
+});
+app.get("/check", (req, res) => {
+  res.json({ status: "✅ backend deployed correctly" });
 });
