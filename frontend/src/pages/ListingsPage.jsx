@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import "./ListingsPage.css";
+const baseURL = process.env.REACT_APP_API_BASE_URL;
 
 function ListingsPage() {
   const [listings, setListings] = useState([]);
@@ -14,18 +15,18 @@ function ListingsPage() {
   const searchQuery = searchParams.get("search");
 
   useEffect(() => {
+    console.log("📡 Fetching from:", `${process.env.REACT_APP_API_BASE_URL}/api/listings`);
     const fetchListings = async () => {
       setLoading(true);
       try {
         let res;
-        if (category) {
-          res = await axios.get(`/api/listings/search?category=${category}`);
-        } else if (searchQuery) {
-          res = await axios.get(`/api/listings/search?search=${searchQuery}`);
-        } else {
-          res = await axios.get("/api/listings");
-        }
-
+       if (category) {
+        res = await axios.get(`${baseURL}/api/listings/search?category=${category}`, { withCredentials: true });
+      } else if (searchQuery) {
+        res = await axios.get(`${baseURL}/api/listings/search?search=${searchQuery}`, { withCredentials: true });
+      } else {
+        res = await axios.get(`${baseURL}/api/listings`, { withCredentials: true });
+      }
         let sortedListings = res.data;
 
         if (sortBy === "price-low") {
