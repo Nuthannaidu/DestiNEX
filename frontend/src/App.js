@@ -21,9 +21,9 @@ function App() {
 
   useEffect(() => {
     // Fetch user from session (after login or Google OAuth)
-    axios.get("http://localhost:5000/api/currentUser", {
-      withCredentials: true, // Send cookies
-    })
+   axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/currentUser`, {
+  withCredentials: true,
+})
     .then((res) => {
       if (res.data.user) {
         setCurrUser(res.data.user);

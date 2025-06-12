@@ -23,7 +23,7 @@ mongoose.connect(dburl)
 
 // ✅ CORS for React frontend
 app.use(cors({
-  origin: "http://localhost:3000", // React URL
+ origin: process.env.FRONTEND_URL,
   credentials: true
 }));
 
@@ -88,7 +88,7 @@ passport.deserializeUser(async (id, done) => {
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "http://localhost:5000/auth/google/callback",
+  callbackURL: process.env.GOOGLE_CALLBACK_URL,
 },async (accessToken, refreshToken, profile, done) => {
    console.log("GOOGLE PROFILE", profile); // Debug
   try {
@@ -131,15 +131,14 @@ app.get('/auth/google/callback',
   }),
   (req, res) => {
     // Redirect to frontend after successful login
-   res.redirect(`http://localhost:3000/listings`);
+  res.redirect(`${process.env.FRONTEND_URL}/listings`);
   }
 );
 
 
 app.get('/logout', (req, res) => {
   req.logout(() => {
-   res.redirect(`http://localhost:3000/listings`);
-
+   res.redirect(`${process.env.FRONTEND_URL}/listings`);
   });
 });
 
@@ -156,7 +155,7 @@ app.use("/api/itineraries", itineraryRoutes);
 app.use("/api", reviewRoutes); // so /api/listings/:listingId/reviews/:reviewId works
 
 // ✅ Root route redirect
-app.get("/", (req, res) => res.redirect("http://localhost:3000"));
+app.get("/", (req, res) => res.redirect(`${process.env.FRONTEND_URL}/listings`));
 
 // ✅ Global error handler
 app.use((err, req, res, next) => {
