@@ -22,10 +22,23 @@ mongoose.connect(dburl)
   .catch(console.error);
 
 // ✅ CORS for React frontend
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://destinex-1.onrender.com"
+];
+
 app.use(cors({
- origin: process.env.FRONTEND_URL,
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like curl, Postman) or from allowed list
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("CORS not allowed from this origin"));
+    }
+  },
   credentials: true
 }));
+
 
 // ✅ Body Parsers
 app.use(express.urlencoded({ extended: true }));
