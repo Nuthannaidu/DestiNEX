@@ -68,7 +68,7 @@ const Login = ({ setCurrUser }) => {
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:5000/auth/google';
+    window.location.href = `${process.env.REACT_APP_API_BASE_URL}/auth/google`;
   };
 
   return (
