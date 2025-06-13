@@ -21,8 +21,8 @@ function App() {
 
   useEffect(() => {
     // Fetch user from session (after login or Google OAuth)
-   axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/currentUser`, {
-  withCredentials: true,
+ axios.get("https://destinex.onrender.com/api/currentUser", {
+  withCredentials: true
 })
     .then((res) => {
       if (res.data.user) {
