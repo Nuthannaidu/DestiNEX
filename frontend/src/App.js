@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 
+
 import ListingsPage from './pages/ListingsPage';
 import ShowListing from './pages/showListing';
 import NewListing from './pages/newListing';
@@ -15,7 +16,7 @@ import Footer from './components/Footer';
 import ItineraryPlanner from "./pages/ItineraryPlanner";
 import ItineraryDetail from "./pages/ItineraryDetail";
 import ItineraryList from "./pages/ItineraryList";
-
+axios.defaults.withCredentials = true;
 function App() {
   const [currUser, setCurrUser] = useState(null);
 
