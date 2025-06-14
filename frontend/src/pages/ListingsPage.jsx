@@ -17,6 +17,7 @@ function ListingsPage() {
   useEffect(() => {
     console.log("📡 Fetching from:", `${process.env.REACT_APP_API_BASE_URL}/api/listings`);
     const fetchListings = async () => {
+      console.log(baseURL)
       setLoading(true);
       try {
         let res;
