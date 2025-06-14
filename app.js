@@ -65,6 +65,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
+     domain: ".onrender.com",
     httpOnly: true,
     secure: true, // set to true if using HTTPS in production
      sameSite: "none",
