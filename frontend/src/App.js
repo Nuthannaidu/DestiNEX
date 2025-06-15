@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+// Pages
 import ListingsPage from './pages/ListingsPage';
 import ShowListing from './pages/showListing';
 import NewListing from './pages/newListing';
@@ -10,21 +11,26 @@ import Login from './pages/login';
 import Signup from './pages/signup';
 import ReviewForm from './pages/ReviewForm';
 import SearchResults from './pages/SearchResults';
+import ItineraryPlanner from './pages/ItineraryPlanner';
+import ItineraryDetail from './pages/ItineraryDetail';
+import ItineraryList from './pages/ItineraryList';
+
+// Components
 import Navbar from './components/navbar';
 import Footer from './components/Footer';
-import ItineraryPlanner from "./pages/ItineraryPlanner";
-import ItineraryDetail from "./pages/ItineraryDetail";
-import ItineraryList from "./pages/ItineraryList";
 
+// Set default config
 axios.defaults.withCredentials = true;
 
-const API_BASE = process.env.REACT_APP_API_BASE_URL || "https://destinex-1.onrender.com";
+// ✅ Use env var or fallback
+const API_BASE = process.env.REACT_APP_API_BASE_URL || "https://destinex.onrender.com";
 
 function App() {
   const [currUser, setCurrUser] = useState(null);
 
   useEffect(() => {
-    console.log("API Base URL:", process.env.REACT_APP_API_BASE_URL);
+    console.log("API Base URL:", API_BASE); // Debug check
+
     axios.get(`${API_BASE}/api/currentUser`)
       .then((res) => {
         if (res.data.user) {
@@ -54,7 +60,8 @@ function App() {
         <Route path="/itinerary/new" element={<ItineraryPlanner currUser={currUser} />} />
         <Route path="/itineraries/:id" element={<ItineraryDetail />} />
         <Route path="/itineraries" element={<ItineraryList />} />
-        {/* Optional route to auto-fetch user after Google login redirect */}
+
+        {/* ✅ Handle Google login redirect callback */}
         <Route path="/oauth/success" element={<OAuthSuccessHandler setCurrUser={setCurrUser} />} />
       </Routes>
 
@@ -63,7 +70,7 @@ function App() {
   );
 }
 
-// Optional component if you're using a special redirect route after Google login
+// ✅ Helper to fetch current user after Google redirect
 function OAuthSuccessHandler({ setCurrUser }) {
   const navigate = useNavigate();
 
@@ -73,6 +80,8 @@ function OAuthSuccessHandler({ setCurrUser }) {
         if (res.data.user) {
           setCurrUser(res.data.user);
           navigate("/listings");
+        } else {
+          navigate("/login");
         }
       })
       .catch(() => {
