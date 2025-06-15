@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import "./ListingsPage.css";
-const baseURL = process.env.FRONTEND_URL;
+
+const baseURL = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000"; // fallback
 
 function ListingsPage() {
   const [listings, setListings] = useState([]);
@@ -15,34 +16,54 @@ function ListingsPage() {
   const searchQuery = searchParams.get("search");
 
   useEffect(() => {
-    console.log("📡 Fetching from:", `${process.env.REACT_APP_API_BASE_URL}/api/listings`);
     const fetchListings = async () => {
-      console.log(baseURL)
       setLoading(true);
+
+      console.log("🌍 REACT_APP_API_BASE_URL:", process.env.REACT_APP_API_BASE_URL);
+      console.log("🌐 baseURL:", baseURL);
+      console.log("🧪 category:", category);
+      console.log("🔎 searchQuery:", searchQuery);
+
       try {
         let res;
-       if (category) {
-        res = await axios.get(`${baseURL}/api/listings/search?category=${category}`, { withCredentials: true });
-      } else if (searchQuery) {
-        res = await axios.get(`${baseURL}/api/listings/search?search=${searchQuery}`, { withCredentials: true });
-      } else {
-        res = await axios.get(`${baseURL}/api/listings`, { withCredentials: true });
-      }
+
+        // Ensure valid non-empty query params
+        if (category && category.trim() !== "") {
+          res = await axios.get(`${baseURL}/api/listings/search?category=${category}`, {
+            withCredentials: true,
+          });
+        } else if (searchQuery && searchQuery.trim() !== "") {
+          res = await axios.get(`${baseURL}/api/listings/search?search=${searchQuery}`, {
+            withCredentials: true,
+          });
+        } else {
+          res = await axios.get(`${baseURL}/api/listings`, {
+            withCredentials: true,
+          });
+        }
+
+        console.log("✅ Response data:", res.data);
+
         let sortedListings = res.data;
 
+        // Sorting
         if (sortBy === "price-low") {
           sortedListings = [...sortedListings].sort((a, b) => a.price - b.price);
         } else if (sortBy === "price-high") {
           sortedListings = [...sortedListings].sort((a, b) => b.price - a.price);
         } else if (sortBy === "name") {
-          sortedListings = [...sortedListings].sort((a, b) => a.title.localeCompare(b.title));
+          sortedListings = [...sortedListings].sort((a, b) =>
+            a.title.localeCompare(b.title)
+          );
         } else if (sortBy === "rating") {
-          sortedListings = [...sortedListings].sort((a, b) => (b.rating || 4.5) - (a.rating || 4.5));
+          sortedListings = [...sortedListings].sort(
+            (a, b) => (b.rating || 4.5) - (a.rating || 4.5)
+          );
         }
 
         setListings(sortedListings);
       } catch (err) {
-        console.error("Error fetching listings:", err);
+        console.error("❌ Error fetching listings:", err);
       } finally {
         setLoading(false);
       }
@@ -68,6 +89,7 @@ function ListingsPage() {
     return "Find your next adventure from our curated collection";
   };
 
+  // 💡 LOADING STATE
   if (loading) {
     return (
       <div className="container mt-4">
@@ -93,6 +115,7 @@ function ListingsPage() {
     );
   }
 
+  // 💡 MAIN RETURN
   return (
     <div className="listings-container">
       {/* Page Header */}
@@ -105,7 +128,7 @@ function ListingsPage() {
         </div>
       </div>
 
-      {/* Sort Dropdown (outside banner) */}
+      {/* Sort Dropdown */}
       <div className="container mb-4 d-flex justify-content-end align-items-center">
         <div className="d-flex gap-2 align-items-center">
           <label htmlFor="sortSelect" className="me-2 mb-0 text-muted">Sort By:</label>
@@ -133,7 +156,7 @@ function ListingsPage() {
         </div>
       </div>
 
-      {/* Listings Grid */}
+      {/* Listings */}
       <div className="container">
         {Array.isArray(listings) && listings.length > 0 ? (
           <>
@@ -215,7 +238,7 @@ function ListingsPage() {
               ))}
             </div>
 
-            {/* Optional Load More Button */}
+            {/* Optional Load More */}
             {listings.length >= 12 && (
               <div className="text-center mt-5">
                 <button className="btn btn-outline-primary btn-lg">
