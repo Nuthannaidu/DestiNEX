@@ -19,18 +19,17 @@ import ItineraryList from './pages/ItineraryList';
 import Navbar from './components/navbar';
 import Footer from './components/Footer';
 
-// Set default config
+// Enable cookies in Axios
 axios.defaults.withCredentials = true;
 
-// ✅ Use env var or fallback
+// Use env variable or fallback to production URL
 const API_BASE = process.env.REACT_APP_API_BASE_URL || "https://destinex.onrender.com";
 
 function App() {
   const [currUser, setCurrUser] = useState(null);
 
   useEffect(() => {
-    console.log("API Base URL:", API_BASE); // Debug check
-
+    // Fetch the current user from the backend (session-based)
     axios.get(`${API_BASE}/api/currentUser`)
       .then((res) => {
         if (res.data.user) {
@@ -38,7 +37,7 @@ function App() {
         }
       })
       .catch((err) => {
-        console.log("Not logged in:", err.response?.data || err.message);
+        console.log("User not logged in:", err?.response?.data || err.message);
       });
   }, []);
 
@@ -61,7 +60,7 @@ function App() {
         <Route path="/itineraries/:id" element={<ItineraryDetail />} />
         <Route path="/itineraries" element={<ItineraryList />} />
 
-        {/* ✅ Handle Google login redirect callback */}
+        {/* Google OAuth callback route */}
         <Route path="/oauth/success" element={<OAuthSuccessHandler setCurrUser={setCurrUser} />} />
       </Routes>
 
@@ -70,7 +69,7 @@ function App() {
   );
 }
 
-// ✅ Helper to fetch current user after Google redirect
+// Google OAuth callback handler
 function OAuthSuccessHandler({ setCurrUser }) {
   const navigate = useNavigate();
 
