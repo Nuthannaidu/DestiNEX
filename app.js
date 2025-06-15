@@ -150,6 +150,10 @@ app.get('/auth/google/callback',
 );
 
 
+app.get('/debug-session', (req, res) => {
+  res.json({ cookie: req.headers.cookie, session: req.session, user: req.user });
+});
+
 app.get('/logout', (req, res) => {
   req.logout(() => {
    res.redirect(`${process.env.FRONTEND_URL}/listings`);
