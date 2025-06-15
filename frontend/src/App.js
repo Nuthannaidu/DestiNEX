@@ -24,6 +24,7 @@ function App() {
   const [currUser, setCurrUser] = useState(null);
 
   useEffect(() => {
+    console.log("API Base URL:", process.env.REACT_APP_API_BASE_URL);
     axios.get(`${API_BASE}/api/currentUser`)
       .then((res) => {
         if (res.data.user) {
