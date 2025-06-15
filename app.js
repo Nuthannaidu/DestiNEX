@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 app.set('trust proxy', 1);
+
 const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override");
@@ -22,15 +23,13 @@ mongoose.connect(dburl)
   .then(() => console.log("✅ Connected to MongoDB"))
   .catch(console.error);
 
-// ✅ CORS for React frontend
+// ✅ CORS
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://destinex-1.onrender.com"
+  "https://destinexx.onrender.com"
 ];
-
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin (like curl, Postman) or from allowed list
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
@@ -40,25 +39,24 @@ app.use(cors({
   credentials: true
 }));
 
-
 // ✅ Body Parsers
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// ✅ Static files and view engine
+// ✅ Static and View Engine
 app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 app.engine("ejs", ejsMate);
 app.set("views", path.join(__dirname, "views"));
 app.use(methodOverride("_method"));
 
-// ✅ Session store in MongoDB
+// ✅ Session store
 const store = MongoStore.create({
   mongoUrl: dburl,
   crypto: { secret: process.env.SECRET },
   touchAfter: 24 * 3600,
 });
-store.on("error", (err) => console.log("❌ Session store error:", err));
+store.on("error", err => console.log("❌ Session store error:", err));
 
 app.use(session({
   store,
@@ -66,31 +64,29 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-     domain: ".onrender.com",
+    domain: ".onrender.com",
     httpOnly: true,
-    secure: true, // set to true if using HTTPS in production
-     sameSite: "none",
+    secure: true,
+    sameSite: "none",
     maxAge: 1000 * 60 * 60 * 24,
   }
 }));
 
-// ✅ Flash and Passport setup
+// ✅ Passport
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-// ---------- Passport Local Strategy ----------
 passport.use(new LocalStrategy(
-  { usernameField: 'email' }, // 👈 Tells it to use 'email'
+  { usernameField: 'email' },
   User.authenticate()
 ));
-
 passport.serializeUser((user, done) => {
-   console.log("Serializing user object:", user); 
+  console.log("Serializing user object:", user);
   done(null, user.id);
 });
 passport.deserializeUser(async (id, done) => {
-   console.log("Deserializing ID:",id);
+  console.log("Deserializing ID:", id);
   try {
     const user = await User.findById(id);
     done(null, user);
@@ -99,19 +95,16 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
-// ---------- Passport Google OAuth Strategy ----------
+// ✅ Google OAuth
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   callbackURL: process.env.GOOGLE_CALLBACK_URL,
-},async (accessToken, refreshToken, profile, done) => {
-   console.log("GOOGLE PROFILE", profile); // Debug
+}, async (accessToken, refreshToken, profile, done) => {
+  console.log("GOOGLE PROFILE", profile);
   try {
-    // Find user by Google ID
     let user = await User.findOne({ googleId: profile.id });
-
     if (!user) {
-      // If user doesn't exist, create one
       user = new User({
         username: profile.displayName,
         googleId: profile.id,
@@ -121,12 +114,12 @@ passport.use(new GoogleStrategy({
     }
     return done(null, user);
   } catch (err) {
-     console.error("GOOGLE AUTH ERROR", err);
+    console.error("GOOGLE AUTH ERROR", err);
     return done(err, null);
   }
 }));
 
-// ✅ Add current user to locals for views and flash messages
+// ✅ Flash messages and user to locals
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
@@ -134,7 +127,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// ---------- Auth Routes for Google OAuth ----------
+// ✅ Auth Routes
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['profile', 'email'] })
 );
@@ -145,19 +138,13 @@ app.get('/auth/google/callback',
     failureFlash: true,
   }),
   (req, res) => {
-    // Redirect to frontend after successful login
-  res.redirect(`${process.env.FRONTEND_URL}/listings`);
+    res.redirect(`${process.env.FRONTEND_URL}/listings`);
   }
 );
 
-
-app.get('/debug-session', (req, res) => {
-  res.json({ cookie: req.headers.cookie, session: req.session, user: req.user });
-});
-
 app.get('/logout', (req, res) => {
   req.logout(() => {
-   res.redirect(`${process.env.FRONTEND_URL}/listings`);
+    res.redirect(`${process.env.FRONTEND_URL}/listings`);
   });
 });
 
@@ -172,27 +159,16 @@ app.use("/api/listings", listingsRoutes);
 app.use("/api/listings", reviewRoutes);
 app.use("/", userRoutes);
 app.use("/api/itineraries", itineraryRoutes);
-app.use("/api", reviewRoutes); // so /api/listings/:listingId/reviews/:reviewId works
+app.use("/api", reviewRoutes);
 
-// ✅ Root route redirect
-app.get("/", (req, res) => res.redirect(`${process.env.FRONTEND_URL}/listings`));
-
-// ✅ Global error handler
-app.use((err, req, res, next) => {
-  console.error("❌ ERROR:", err.stack);
-  if (res.headersSent) return next(err);
-  if (req.originalUrl.startsWith("/api/")) {
-    res.status(500).json({ error: "Server error" });
-  } else {
-    req.flash("error", "Something went wrong!");
-    res.redirect("/listings");
-  }
+app.get('/debug-session', (req, res) => {
+  res.json({ cookie: req.headers.cookie, session: req.session, user: req.user });
 });
-
-// ✅ Start server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server is running on port ${PORT}`);
+app.get("/test", (req, res) => {
+  res.send("✅ Backend is working!");
+});
+app.get("/check", (req, res) => {
+  res.json({ status: "✅ backend deployed correctly" });
 });
 app.get('/api/currentUser', (req, res) => {
   if (req.isAuthenticated()) {
@@ -201,9 +177,17 @@ app.get('/api/currentUser', (req, res) => {
     res.status(401).json({ user: null });
   }
 });
-app.get("/test", (req, res) => {
-  res.send("✅ Backend is working!");
+
+// ✅ React Frontend Build — serve static frontend
+app.use(express.static(path.join(__dirname, "client/build")));
+
+// ✅ React Frontend Catch-All Route — must be LAST
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/build", "index.html"));
 });
-app.get("/check", (req, res) => {
-  res.json({ status: "✅ backend deployed correctly" });
+
+// ✅ Start Server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`🚀 Server is running on port ${PORT}`);
 });
