@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import "./ListingsPage.css";
-const baseURL = process.env.REACT_APP_API_BASE_URL;
+const baseURL = process.env.FRONTEND_URL;
 
 function ListingsPage() {
   const [listings, setListings] = useState([]);
