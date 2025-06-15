@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
 
 import ListingsPage from './pages/ListingsPage';
 import ShowListing from './pages/showListing';
@@ -16,23 +15,24 @@ import Footer from './components/Footer';
 import ItineraryPlanner from "./pages/ItineraryPlanner";
 import ItineraryDetail from "./pages/ItineraryDetail";
 import ItineraryList from "./pages/ItineraryList";
+
 axios.defaults.withCredentials = true;
+
+const API_BASE = process.env.REACT_APP_API_BASE_URL || "https://destinex-1.onrender.com";
+
 function App() {
   const [currUser, setCurrUser] = useState(null);
 
   useEffect(() => {
-    // Fetch user from session (after login or Google OAuth)
-   axios.get("https://destinex.onrender.com/api/currentUser", {
-  withCredentials: true,
-})
-    .then((res) => {
-      if (res.data.user) {
-        setCurrUser(res.data.user);
-      }
-    })
-    .catch((err) => {
-      console.log("Not logged in:", err.response?.data || err.message);
-    });
+    axios.get(`${API_BASE}/api/currentUser`)
+      .then((res) => {
+        if (res.data.user) {
+          setCurrUser(res.data.user);
+        }
+      })
+      .catch((err) => {
+        console.log("Not logged in:", err.response?.data || err.message);
+      });
   }, []);
 
   return (
@@ -53,11 +53,33 @@ function App() {
         <Route path="/itinerary/new" element={<ItineraryPlanner currUser={currUser} />} />
         <Route path="/itineraries/:id" element={<ItineraryDetail />} />
         <Route path="/itineraries" element={<ItineraryList />} />
+        {/* Optional route to auto-fetch user after Google login redirect */}
+        <Route path="/oauth/success" element={<OAuthSuccessHandler setCurrUser={setCurrUser} />} />
       </Routes>
 
       <Footer />
     </Router>
   );
+}
+
+// Optional component if you're using a special redirect route after Google login
+function OAuthSuccessHandler({ setCurrUser }) {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.get(`${API_BASE}/api/currentUser`)
+      .then((res) => {
+        if (res.data.user) {
+          setCurrUser(res.data.user);
+          navigate("/listings");
+        }
+      })
+      .catch(() => {
+        navigate("/login");
+      });
+  }, [setCurrUser, navigate]);
+
+  return <p>Logging in...</p>;
 }
 
 export default App;
