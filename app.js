@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
-app.set('trust proxy', 1);
 const app = express();
+app.set('trust proxy', 1);
 const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override");
