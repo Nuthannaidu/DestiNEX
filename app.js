@@ -179,11 +179,10 @@ app.get('/api/currentUser', (req, res) => {
 });
 
 // ✅ React Frontend Build — serve static frontend
-app.use(express.static(path.join(__dirname, "client/build")));
+app.use(express.static(path.join(__dirname, "frontend", "build")));
 
-// ✅ React Frontend Catch-All Route — must be LAST
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/build", "index.html"));
+  res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
 });
 
 // ✅ Start Server
