@@ -21,7 +21,7 @@ const ReviewForm = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/listings/${id}/reviews`, // use full URL if needed
+        `https://destinexx.onrender.com/api/listings/${id}/reviews`, // use full URL if needed
         {
           review: {
             rating,
