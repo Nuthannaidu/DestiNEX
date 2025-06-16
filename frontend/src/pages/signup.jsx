@@ -24,6 +24,9 @@ import {
 } from 'react-icons/fa';
 import './Signup.css';
 
+// ✅ Use env var or fallback
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://destinexx.onrender.com';
+
 const Signup = ({ setCurrUser }) => {
   const [formData, setFormData] = useState({
     username: '',
@@ -85,8 +88,9 @@ const Signup = ({ setCurrUser }) => {
 
     try {
       const { username, email, password } = formData;
+
       const res = await axios.post(
-        'http://localhost:5000/signup',
+        `${API_BASE_URL}/signup`,
         { username, email, password },
         { withCredentials: true }
       );
@@ -102,7 +106,8 @@ const Signup = ({ setCurrUser }) => {
   };
 
   const handleGoogleSignup = () => {
-    window.location.href = 'http://localhost:5000/auth/google';
+    // ✅ Google Auth URL updated to production
+    window.location.href = `${API_BASE_URL}/auth/google`;
   };
 
   return (
