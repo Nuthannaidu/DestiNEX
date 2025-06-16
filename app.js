@@ -66,7 +66,6 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    domain: ".onrender.com", // or just remove if not using subdomains
     httpOnly: true,
     secure: true,
     sameSite: "none",
