@@ -23,7 +23,7 @@ import Footer from './components/Footer';
 axios.defaults.withCredentials = true;
 
 // Use env variable or fallback to production URL
-const API_BASE = process.env.REACT_APP_API_BASE_URL || "https://destinex.onrender.com";
+const API_BASE = process.env.REACT_APP_API_BASE_URL || "https://destinexx.onrender.com";
 
 function App() {
   const [currUser, setCurrUser] = useState(null);
