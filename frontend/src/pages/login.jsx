@@ -51,9 +51,9 @@ const Login = ({ setCurrUser }) => {
     setValidated(true);
 
     try {
-      const res = await axios.post('http://localhost:5000/login', formData, {
-        withCredentials: true
-      });
+     const res = await axios.post('https://destinexx.onrender.com/login', formData, {
+  withCredentials: true
+});
       setCurrUser(res.data.user);
       navigate('/listings');
     } catch (err) {
