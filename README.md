@@ -149,6 +149,7 @@ CLOUDINARY_API_SECRET=xxxx
 GOOGLE_CLIENT_ID=xxxx
 GOOGLE_CLIENT_SECRET=xxxx
 ```
+4️⃣ Run the servers
 ```bash
 npm run dev
 npm start
@@ -162,7 +163,8 @@ Open an issue to discuss major changes.
 
 If you found this project helpful, please consider giving it a ⭐ star on GitHub!
 👨‍💻 Developer
-
 Nuthannaidu
+
 Full-Stack MERN Developer
+
 🔥 Passionate about building real-world applications
