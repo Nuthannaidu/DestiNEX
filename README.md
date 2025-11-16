@@ -87,4 +87,107 @@ It features secure authentication, clean RESTful APIs, and dynamic React UI — 
 ---
 
 ## 📂 Project Structure
+📦 DestiNEX
+├── controllers/ # Business logic
+├── frontend/ # React app
+├── init/ # DB setup
+├── middleware/ # Auth middlewares
+├── models/ # Mongoose schemas
+├── public/ # Static files
+├── routes/ # API routes
+├── utils/ # Utility functions
+├── app.js # Main server file
+└── cloudConfig.js # Cloudinary config
+
+---
+
+## 🧪 REST API Endpoints
+
+### 🟦 Listings
+| Method | Route | Description |
+|--------|--------|-------------|
+| GET | /api/listings | Get all listings |
+| POST | /api/listings | Create listing |
+| GET | /api/listings/:id | Get single listing |
+| PUT | /api/listings/:id | Update listing |
+| DELETE | /api/listings/:id | Delete listing |
+
+### 🟩 Reviews
+| Method | Route |
+|--------|--------|
+| POST | /api/listings/:id/reviews |
+| PUT | /api/listings/:listingId/reviews/:reviewId |
+| DELETE | /api/listings/:listingId/reviews/:reviewId |
+
+### 🟥 Itineraries
+| Method | Route |
+|--------|--------|
+| POST | /api/itineraries |
+| GET | /api/itineraries |
+| GET | /api/itineraries/:id |
+| PUT | /api/itineraries/:id |
+| DELETE | /api/itineraries/:id |
+
+---
+
+## ⚙️ Installation & Setup
+
+### 1️⃣ Clone the repository
+```bash
+git clone https://github.com/Nuthannaidu/DestiNEX.git
+cd DestiNEX
+2️⃣ Install dependencies
+cd backend && npm install
+cd ../frontend && npm install
+
+3️⃣ Add environment variables
+Create a .env file inside /backend:
+MONGO_URI=YOUR_MONGO_ATLAS_URI
+SESSION_SECRET=YOUR_SECRET
+CLOUDINARY_CLOUD_NAME=xxxx
+CLOUDINARY_API_KEY=xxxx
+CLOUDINARY_API_SECRET=xxxx
+GOOGLE_CLIENT_ID=xxxx
+GOOGLE_CLIENT_SECRET=xxxx
+
+4️⃣ Run the servers
+# Backend
+npm run dev
+
+# Frontend
+npm start
+
+
+📸 Screenshots
+(Add images in a /screenshots folder for better presentation)
+Example:
+screenshots/
+ ├── home.png
+ ├── listing.png
+ ├── itinerary.png
+ └── login.png
+
+
+🤝 Contributing
+Pull requests are welcome!
+Open an issue to discuss major changes.
+
+⭐ Support
+If you found this project helpful, please consider giving it a star ⭐ on GitHub!
+
+👨‍💻 Developer
+Nuthannaidu
+Full-Stack MERN Developer
+🔥 Passionate about building real-world web applications
+
+---
+
+If you want, I can also:
+
+✅ Create a **banner image** for the top  
+✅ Add **dark/light mode badges**  
+✅ Add **demo GIFs**  
+✅ Add an **architecture diagram**  
+
+Just say: **“Add banner”**, **“Add GIF demo”**, or **“Add architecture diagram.”**
 
