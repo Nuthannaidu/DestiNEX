@@ -82,54 +82,51 @@ It uses secure session-based authentication, Cloudinary image hosting, and a cle
 ├── utils/          # Utility functions
 ├── app.js          # Main server file
 └── cloudConfig.js  # Cloudinary config
+🧪 REST API Endpoints
+🟦 Listings
+Method	Route	Description
+GET	/api/listings	Get all listings
+POST	/api/listings	Create listing
+GET	/api/listings/:id	Get single listing
+PUT	/api/listings/:id	Update listing
+DELETE	/api/listings/:id	Delete listing
 
----
+Export to Sheets
 
-## 🧪 REST API Endpoints
+🟩 Reviews
+Method	Route
+POST	/api/listings/:id/reviews
+PUT	/api/listings/:listingId/reviews/:reviewId
+DELETE	/api/listings/:listingId/reviews/:reviewId
 
-### 🟦 Listings
-| Method | Route | Description |
-|--------|--------|-------------|
-| GET | /api/listings | Get all listings |
-| POST | /api/listings | Create listing |
-| GET | /api/listings/:id | Get single listing |
-| PUT | /api/listings/:id | Update listing |
-| DELETE | /api/listings/:id | Delete listing |
+Export to Sheets
 
-### 🟩 Reviews
-| Method | Route |
-|--------|--------|
-| POST | /api/listings/:id/reviews |
-| PUT | /api/listings/:listingId/reviews/:reviewId |
-| DELETE | /api/listings/:listingId/reviews/:reviewId |
+🟥 Itineraries
+Method	Route
+POST	/api/itineraries
+GET	/api/itineraries
+GET	/api/itineraries/:id
+PUT	/api/itineraries/:id
+DELETE	/api/itineraries/:id
 
-### 🟥 Itineraries
-| Method | Route |
-|--------|--------|
-| POST | /api/itineraries |
-| GET | /api/itineraries |
-| GET | /api/itineraries/:id |
-| PUT | /api/itineraries/:id |
-| DELETE | /api/itineraries/:id |
+Export to Sheets
 
----
+⚙️ Installation & Setup
+1️⃣ Clone the repository
+Bash
 
-## ⚙️ Installation & Setup
-
-### 1️⃣ Clone the repository
-```bash
-git clone https://github.com/Nuthannaidu/DestiNEX.git
+git clone [https://github.com/Nuthannaidu/DestiNEX.git](https://github.com/Nuthannaidu/DestiNEX.git)
 cd DestiNEX
 2️⃣ Install dependencies
-bash
-Copy code
+Bash
+
 cd backend && npm install
 cd ../frontend && npm install
 3️⃣ Add environment variables
 Create a .env file inside /backend:
 
-ini
-Copy code
+Code snippet
+
 MONGO_URI=YOUR_MONGO_ATLAS_URI
 SESSION_SECRET=YOUR_SECRET
 CLOUDINARY_CLOUD_NAME=xxxx
@@ -138,59 +135,29 @@ CLOUDINARY_API_SECRET=xxxx
 GOOGLE_CLIENT_ID=xxxx
 GOOGLE_CLIENT_SECRET=xxxx
 4️⃣ Run the servers
-bash
-Copy code
+Bash
+
 # Backend
 npm run dev
+Bash
 
 # Frontend
 npm start
 📸 Screenshots
 (Add images in a /screenshots folder for better presentation)
 
-arduino
-Copy code
+Plaintext
+
 screenshots/
- ├── home.png
- ├── listing.png
- ├── itinerary.png
- └── login.png
+├── home.png
+├── listing.png
+├── itinerary.png
+└── login.png
 🤝 Contributing
-Pull requests are welcome!
-Open an issue to discuss major changes.
+Pull requests are welcome! Open an issue to discuss major changes.
 
 ⭐ Support
 If you found this project helpful, please consider giving it a ⭐ star on GitHub!
 
 👨‍💻 Developer
-Nuthannaidu
-Full-Stack MERN Developer
-🔥 Passionate about building real-world web applications
-
-yaml
-Copy code
-
----
-
-# ✅ FIXED  
-✔ All code blocks properly closed  
-✔ No leaked text  
-✔ Formatting perfect  
-✔ Works inside GitHub README  
-✔ Professional layout  
-
----
-
-If you want, I can also generate:  
-🌈 **Banner Image** • 📐 **Architecture Diagram** • 🎥 **GIF Demo** • 🏷️ **More badges**  
-
-Just tell me: **“Add everything”** or pick what you want.
-
-
-
-
-
-
-
-
-
+Nuthannaidu Full-Stack MERN Developer 🔥 Passionate about building real-world web applications
