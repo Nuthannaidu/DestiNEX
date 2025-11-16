@@ -70,7 +70,6 @@ It uses secure session-based authentication, Cloudinary image hosting, and a cle
 
 ## 📂 Project Structure
 
-```text
 📦 DestiNEX
 ├── controllers/    # Business logic
 ├── frontend/       # React app
