@@ -127,12 +127,14 @@ It uses secure session-based authentication, Cloudinary image hosting, and a cle
 ```bash
 git clone https://github.com/Nuthannaidu/DestiNEX.git
 cd DestiNEX
-2️⃣ Install dependencies
-cd backend && npm install
-cd ../frontend && npm install
-3️⃣ Add environment variables
 
-Create a .env file inside /backend:
+cd backend
+npm install
+cd ../frontend
+npm install
+cd ../frontend
+npm install
+
 MONGO_URI=YOUR_MONGO_ATLAS_URI
 SESSION_SECRET=YOUR_SECRET
 CLOUDINARY_CLOUD_NAME=xxxx
@@ -140,21 +142,6 @@ CLOUDINARY_API_KEY=xxxx
 CLOUDINARY_API_SECRET=xxxx
 GOOGLE_CLIENT_ID=xxxx
 GOOGLE_CLIENT_SECRET=xxxx
-4️⃣ Run the servers
-# Backend
+
 npm run dev
-# Frontend
 npm start
-🤝 Contributing
-
-Pull requests are welcome!
-Open an issue to discuss major changes.
-
-⭐ Support
-
-If you found this project helpful, please consider giving it a ⭐ star on GitHub!
-👨‍💻 Developer
-
-Nuthannaidu
-Full-Stack MERN Developer
-🔥 Passionate about building real-world web applications
