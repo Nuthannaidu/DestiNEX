@@ -81,51 +81,58 @@ It uses secure session-based authentication, Cloudinary image hosting, and a cle
 ├── utils/          # Utility functions
 ├── app.js          # Main server file
 └── cloudConfig.js  # Cloudinary config
-🧪 REST API Endpoints
-🟦 Listings
-Method	Route	Description
-GET	/api/listings	Get all listings
-POST	/api/listings	Create listing
-GET	/api/listings/:id	Get single listing
-PUT	/api/listings/:id	Update listing
-DELETE	/api/listings/:id	Delete listing
 
-Export to Sheets
 
-🟩 Reviews
-Method	Route
-POST	/api/listings/:id/reviews
-PUT	/api/listings/:listingId/reviews/:reviewId
-DELETE	/api/listings/:listingId/reviews/:reviewId
+---
 
-Export to Sheets
+## 🧪 REST API Endpoints
 
-🟥 Itineraries
-Method	Route
-POST	/api/itineraries
-GET	/api/itineraries
-GET	/api/itineraries/:id
-PUT	/api/itineraries/:id
-DELETE	/api/itineraries/:id
+### 🟦 **Listings**
 
-Export to Sheets
+| Method | Route | Description |
+|--------|--------|-------------|
+| GET    | /api/listings        | Get all listings |
+| POST   | /api/listings        | Create listing |
+| GET    | /api/listings/:id    | Get single listing |
+| PUT    | /api/listings/:id    | Update listing |
+| DELETE | /api/listings/:id    | Delete listing |
 
-⚙️ Installation & Setup
-1️⃣ Clone the repository
-Bash
+---
 
-git clone [https://github.com/Nuthannaidu/DestiNEX.git](https://github.com/Nuthannaidu/DestiNEX.git)
+### 🟩 **Reviews**
+
+| Method | Route |
+|--------|--------|
+| POST   | /api/listings/:id/reviews |
+| PUT    | /api/listings/:listingId/reviews/:reviewId |
+| DELETE | /api/listings/:listingId/reviews/:reviewId |
+
+---
+
+### 🟥 **Itineraries**
+
+| Method | Route |
+|--------|--------|
+| POST   | /api/itineraries |
+| GET    | /api/itineraries |
+| GET    | /api/itineraries/:id |
+| PUT    | /api/itineraries/:id |
+| DELETE | /api/itineraries/:id |
+
+---
+
+## ⚙️ Installation & Setup
+
+### 1️⃣ Clone the repository  
+```bash
+git clone https://github.com/Nuthannaidu/DestiNEX.git
 cd DestiNEX
 2️⃣ Install dependencies
-Bash
-
 cd backend && npm install
 cd ../frontend && npm install
 3️⃣ Add environment variables
+
 Create a .env file inside /backend:
-
-Code snippet
-
 MONGO_URI=YOUR_MONGO_ATLAS_URI
 SESSION_SECRET=YOUR_SECRET
 CLOUDINARY_CLOUD_NAME=xxxx
@@ -134,29 +141,20 @@ CLOUDINARY_API_SECRET=xxxx
 GOOGLE_CLIENT_ID=xxxx
 GOOGLE_CLIENT_SECRET=xxxx
 4️⃣ Run the servers
-Bash
-
 # Backend
 npm run dev
-Bash
-
 # Frontend
 npm start
-📸 Screenshots
-(Add images in a /screenshots folder for better presentation)
-
-Plaintext
-
-screenshots/
-├── home.png
-├── listing.png
-├── itinerary.png
-└── login.png
 🤝 Contributing
-Pull requests are welcome! Open an issue to discuss major changes.
+
+Pull requests are welcome!
+Open an issue to discuss major changes.
 
 ⭐ Support
-If you found this project helpful, please consider giving it a ⭐ star on GitHub!
 
+If you found this project helpful, please consider giving it a ⭐ star on GitHub!
 👨‍💻 Developer
-Nuthannaidu Full-Stack MERN Developer 🔥 Passionate about building real-world web applications
+
+Nuthannaidu
+Full-Stack MERN Developer
+🔥 Passionate about building real-world web applications
